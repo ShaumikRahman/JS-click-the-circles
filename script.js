@@ -4,7 +4,7 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight - document.getElementById('nav').clientHeight;
 
-const size = 33;
+const size = 50;
 const spawnzoneLeft = size * 2;
 const spawnzoneRight = canvas.width - size * 2;
 const spawnzoneTop = size * 2;
@@ -15,8 +15,14 @@ let mousePosY;
 let collisionCheckX;
 let collisionCheckY;
 let distance;
-let numberOfCircles = 3;
+let numberOfCircles = 20;
 let circleList = [];
+
+document.addEventListener('keydown', function (e) {
+    if (e.code == "Space") {
+        location.reload();
+    }
+});
 
 function getRand(min, max) {
     min = Math.ceil(min);
@@ -38,6 +44,8 @@ function drawCircle(xPos, yPos) {
     ctx.closePath();
     ctx.fillStyle = 'white';
     ctx.fill();
+    ctx.strokeStyle = "red";
+    ctx.stroke();
 }
 
 function update() {
@@ -53,11 +61,8 @@ function update() {
         collisionCheckY = circleList[i].y - mousePosY;
         distance = Math.sqrt(collisionCheckX * collisionCheckX + collisionCheckY * collisionCheckY);
 
-        if (mousePosX < spawnzoneLeft || 
-            mousePosX > spawnzoneRight || 
-            mousePosY < spawnzoneTop || 
-            mousePosY > spawnzoneBottom) {
-            // out of spawn zone
+        if (distance < size) {
+
         }
 
         //console.log(`${mousePosX} and ${mousePosY}`);
