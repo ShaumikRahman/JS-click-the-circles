@@ -18,6 +18,8 @@ let distance;
 let numberOfCircles = 15;
 let circleList = [];
 
+document.getElementById("restart").style.visibility = "hidden";
+
 document.addEventListener('keydown', function (e) {
     if (e.code == "Space") {
         location.reload();
@@ -82,6 +84,12 @@ onkeydown = function (e) {
     }
 }
 
+function endCheck () {
+    if (numberOfCircles == 0) {
+        document.getElementById("restart").style.visibility = "visible";
+    }
+}
+
 function update() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (let i = 0; i < numberOfCircles; i++) {
@@ -92,9 +100,8 @@ function update() {
             mousePosY = e.clientY - document.getElementById('nav').clientHeight;
         }
 
-        //console.log(`${mousePosX} and ${mousePosY}`);
-
     }
+    endCheck();
     requestAnimationFrame(update);
 }
 
